@@ -1,8 +1,9 @@
 const firebase = require('firebase');
+const config = require('../config.json');
 
 const firebaseApp = firebase.initializeApp({
-    ...require('<Path to firebase credentials>'),
-    databaseURL: '<URL of firebase realtime database>'
+    ...require(config.path),
+    databaseURL: config.url
 })
 
 module.exports = {
