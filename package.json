@@ -1,0 +1,20 @@
+{
+  "name": "fireshell",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest .",
+    "coverage": "jest --coverage"
+  },
+  "author": "Aayush Kurup",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^7.24.0",
+    "shortid": "^2.2.15"
+  },
+  "devDependencies": {
+    "eslint": "^7.11.0",
+    "jest": "^26.5.3"
+  }
+}
