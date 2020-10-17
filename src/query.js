@@ -43,11 +43,6 @@ function processQuery(input, db = require('../config.json').db){
     }
 }
 
-processQuery('db.ref().child("posts").child("node js").set({ "author": "Aayush Kurup", "metrics": { "likes": 12123, "shares": 9881, "views": 1299812 }, "title": "An Introduction to Node js"})', 'database').then(data => {
-    console.log(data);
-});
-
-
 module.exports = {
     processQuery
 }
