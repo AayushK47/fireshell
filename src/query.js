@@ -28,7 +28,10 @@ function processQuery(input, db = require('../config.json').db){
                 } else if(data.data === undefined){
                     if(data.empty){
                         return 'No documents found';
-                    } else {
+                    } else if(data.forEach === undefined) {
+                        return "Query execution successful.";
+                    }
+                    else {
                         let obj = {};
                         data.forEach((doc) => {
                             obj[doc.id] = doc.data();

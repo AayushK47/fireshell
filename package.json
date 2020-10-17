@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest .",
-    "coverage": "jest --coverage"
+    "test": "jest . --env=node",
+    "coverage": "jest --coverage --env=node"
   },
   "author": "Aayush Kurup",
   "license": "MIT",
