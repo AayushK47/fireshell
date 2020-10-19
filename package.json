@@ -1,0 +1,51 @@
+{
+  "name": "fireshell",
+  "version": "1.0.0",
+  "description": "A shell for firebase realtime database and cloud firestore",
+  "main": "dist/index.js",
+  "bin": {
+    "@aayushk47/fireshell": "./bin/fireshell.js",
+    "fireshell": "./bin/fireshell.js"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "babel src --out-dir dist --ignore src/*.test.js",
+    "test": "jest . --coverage --env=node --forceExit",
+    "report-coverage": "cat ./coverage/lcov.info | codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AayushK47/fireshell.git"
+  },
+  "author": {
+    "name": "Aayush Kurup",
+    "email": "aayushkurup786@outlook.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "codecov": "^3.8.0",
+    "dotenv": "^8.2.0",
+    "firebase": "^7.24.0",
+    "inquirer": "^7.3.3",
+    "shortid": "^2.2.15"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "eslint": "^7.11.0",
+    "jest": "^26.5.3"
+  },
+  "keywords": [
+    "fireshell",
+    "firebase",
+    "database",
+    "firestore",
+    "firebase-tools",
+    "firebase-cli"
+  ],
+  "files": [
+    "dist",
+    "bin"
+  ]
+}
