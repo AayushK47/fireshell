@@ -2,8 +2,7 @@ const firebase = require('firebase');
 require('dotenv').config();
 
 var config;
-var config_file = require('../config.json');
-
+var config_file;
 if(process.env.CONFIG_PATH || process.env.JSON){
     const path = process.env.CONFIG_PATH;
 
@@ -13,6 +12,7 @@ if(process.env.CONFIG_PATH || process.env.JSON){
         config = require(process.env.CONFIG_PATH)
     }
 } else {
+    config_file = require('../config.json');
     config = require(config_file.path);
 }
 

@@ -2,7 +2,6 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
 const { processQuery } = require('./query');
-// require('dotenv').config({path: path.resolve('../')});
 
 function main(){
     inquirer.prompt([
@@ -33,12 +32,7 @@ function main(){
             console.error(Error('You need to provide the database url in order to connect to the realtime database'));
             process.exit();
         }
-    
-        fs.writeFileSync(path.join(__dirname, '../', '.env'), `
-            DB=${responses.db}
-            CONFIG_PATH=${responses.path}
-            URL=${responses.url}
-        `);
+
         fs.writeFileSync(path.join(__dirname, '../', 'config.json'), JSON.stringify({db: responses.db, path: responses.path, url: responses.url}));
         inputQueries();
     
