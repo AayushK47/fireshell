@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
 const { processQuery } = require('./query');
-require('dotenv').config({path: path.resolve('../')});
+// require('dotenv').config({path: path.resolve('../')});
 
 function main(){
     inquirer.prompt([
@@ -39,6 +39,7 @@ function main(){
             CONFIG_PATH=${responses.path}
             URL=${responses.url}
         `);
+        fs.writeFileSync(path.join(__dirname, '../', 'config.json'), JSON.stringify({db: responses.db, path: responses.path, url: responses.url}));
         inputQueries();
     
     });

@@ -1,18 +1,24 @@
 const firebase = require('firebase');
-const pathpack = require('path');
-require('dotenv').config({path: pathpack.resolve('../')});
-const path = process.env.CONFIG_PATH;
-var config;
+require('dotenv').config();
 
-if(path === undefined){
-    config = JSON.parse(process.env.JSON);
+var config;
+var config_file = require('../config.json');
+
+if(process.env.CONFIG_PATH || process.env.JSON){
+    const path = process.env.CONFIG_PATH;
+
+    if(path === undefined){
+        config = JSON.parse(process.env.JSON);
+    } else {
+        config = require(process.env.CONFIG_PATH)
+    }
 } else {
-    config = require(process.env.CONFIG_PATH)
+    config = require(config_file.path);
 }
 
 const firebaseApp = firebase.initializeApp({
     ...config,
-    databaseURL: process.env.URL
+    databaseURL: process.env.URL || config_file.url
 });
 
 module.exports = {
