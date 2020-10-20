@@ -4,6 +4,14 @@
 
 Fireshell is a CLI tool which can be used to execute realtime database and cloud firestore queries in your terminal.
 
+![Travis (.org)](https://img.shields.io/travis/AayushK47/fireshell?style=for-the-badge)
+![Codecov](https://img.shields.io/codecov/c/github/AayushK47/fireshell?style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/AayushK47/fireshell?style=for-the-badge)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/AayushK47/fireshell?style=for-the-badge)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/AayushK47/fireshell?color=yellowgreen&style=for-the-badge)
+
+
+
 ## Installation
 
 To install fireshell, simply pull up your terminal and run the following command :-
