@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes will be documented i this file
+All notable changes will be documented in this file
 
 ## Changelog v1.1.0
 
