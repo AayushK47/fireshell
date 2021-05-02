@@ -25,7 +25,7 @@ To install fireshell, simply pull up your terminal and run the following command
 npm install -g fireshell
 ```
 
-**NOTE:** You need to have Node.js and Node Package Manager installed in order install fireshell.
+**NOTE:** You need to have Node.js and Node Package Manager installed in order to install fireshell.
 
 ## Usage
 
