@@ -10,6 +10,11 @@ Fireshell is a CLI tool which can be used to execute realtime database and cloud
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/AayushK47/fireshell?style=for-the-badge)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/AayushK47/fireshell?color=yellowgreen&style=for-the-badge)
 
+## Changelog v1.1.0
+
+### Release Highlights
+
+Added a setup for a config file which can be used to access the database directly without answering the prompts everytime user starts the shell.
 
 
 ## Installation
@@ -35,11 +40,15 @@ First you'll have to choose the service you want to connect with :-
 
 Then you have to provide the **absolute path** to your firebase config file. It has to be a JSON file that you get from firebase to connect your application with your firebase project.
 
+**Important Note:-** Please make sure that the firebase config file has a key called "projectId". This key is very important in order to authenticate. If your config file has a key called "project_id", rename it to "projectId".
+
 <img width="500" alt="Portfolio" src="./media/m2.png">
 
 The last prompt will ask you to enter the reltime database url. If you chose firestore in the 1st prompt, then your can ignore this question. Otherwise, enter the url.
 
 <img width="500" alt="Portfolio" src="./media/m3.png">
+
+**Note:-** In versions >= 1.1.0 these prompts will be asked only once. After that, the shell will connect automatically using previously provided parameters.
 
 ### Writing Queries
 

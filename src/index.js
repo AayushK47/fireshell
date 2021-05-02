@@ -4,39 +4,58 @@ const path = require('path');
 const { processQuery } = require('./query');
 
 function main(){
-    inquirer.prompt([
-        {
-            'type': 'list',
-            'name': 'db',
-            'message': 'Choose one of the following',
-            'choices': ['Realtime Database', 'Cloud Firestore']
-        },
-        {
-            'type': 'input',
-            'name': 'path',
-            'message': 'Enter the absolute path to firebase config file\n'
-        },
-        {
-            'type': 'input',
-            'name': 'url',
-            'message': 'Enter the url of firebase realtime database. (Ignore if you chose Cloud Firestore)\n'
-        }
-    ]).then(responses => {
-        if(responses.db === 'Realtime Database'){
-            responses.db = 'database';
-        } else {
-            responses.db = 'firestore'
-        }
+    const dirs = fs.readdirSync(__dirname + "/../")
+    if(dirs.indexOf("config.json") === -1) {
+        inquirer.prompt([
+            {
+                'type': 'list',
+                'name': 'db',
+                'message': 'Choose one of the following',
+                'choices': ['Realtime Database', 'Cloud Firestore']
+            },
+            {
+                'type': 'input',
+                'name': 'path',
+                'message': 'Enter the absolute path to firebase config file\n'
+            },
+            {
+                'type': 'input',
+                'name': 'url',
+                'message': 'Enter the url of firebase realtime database. (Ignore if you chose Cloud Firestore)\n'
+            }
+        ]).then(responses => {
+            if(responses.db === 'Realtime Database'){
+                responses.db = 'database';
+            } else {
+                responses.db = 'firestore'
+            }
+        
+            if(responses.db === 'database' && responses.url === ''){
+                console.error(Error('You need to provide the database url in order to connect to the realtime database'));
+                process.exit();
+            }
     
-        if(responses.db === 'database' && responses.url === ''){
-            console.error(Error('You need to provide the database url in order to connect to the realtime database'));
-            process.exit();
-        }
-
-        fs.writeFileSync(path.join(__dirname, '../', 'config.json'), JSON.stringify({db: responses.db, path: responses.path, url: responses.url}));
+            fs.writeFile(
+                path.join(__dirname, '../', 'config.json'), 
+                JSON.stringify(
+                    {
+                        db: responses.db,
+                        path: responses.path,
+                        url: responses.url
+                    }
+                ),
+                (err) => {
+                    if(err) {
+                        console.log(err);
+                    }
+                }
+            );
+            inputQueries();
+        });
+    } else {
         inputQueries();
+    }
     
-    });
 }
 
 function inputQueries() {
