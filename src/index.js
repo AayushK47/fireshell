@@ -1,7 +1,58 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const { Command } = require('commander')
 const path = require('path');
 const { processQuery } = require('./query');
+const { processOutput, createConfigFile } = require('./utils');
+const { firerun } = require('./firerun');
+
+function fireshellCLI() {
+    const program = new Command();
+    program
+        .command('set-config <path> <db>')
+        .option('-u, --url type', 'Url for firebase realtimr database')
+        .action(
+            (fbJSONPath, db, _command, options) => {
+                const config = {}
+                if(options === undefined) {
+                    config.path = fbJSONPath;
+                    config.db = db;
+                    config.url = '';
+                } else {
+                    config.path = fbJSONPath;
+                    config.db = db;
+                    config.url = options[0];
+                    console.log(options[0])
+                }
+                console.log()
+                createConfigFile(
+                    path.join(__dirname, '../', 'config.json'),
+                    config
+                )
+            }
+        );
+    
+    program
+        .command('reset')
+        .action(() => {
+            fs.unlink(
+                path.join(__dirname, '../', 'config.json'),
+                () => console.log('Config deleted successfully')
+            )
+        });
+    
+    program
+        .command('firerun <inputFilePath> <outputDir>')
+        .action((inputFilePath, outDir) => {
+            firerun(inputFilePath, outDir)
+        })
+    
+    program.parse(process.argv);
+
+    if(process.argv.length <= 2) {
+        main()
+    }
+}
 
 function main(){
     const dirs = fs.readdirSync(__dirname + "/../")
@@ -34,22 +85,14 @@ function main(){
                 console.error(Error('You need to provide the database url in order to connect to the realtime database'));
                 process.exit();
             }
-    
-            fs.writeFile(
-                path.join(__dirname, '../', 'config.json'), 
-                JSON.stringify(
-                    {
-                        db: responses.db,
-                        path: responses.path,
-                        url: responses.url
-                    }
-                ),
-                (err) => {
-                    if(err) {
-                        console.log(err);
-                    }
+            createConfigFile(
+                path.join(__dirname, '../', 'config.json'),
+                {
+                    db: responses.db,
+                    path: responses.path,
+                    url: responses.url
                 }
-            );
+            )
             inputQueries();
         });
     } else {
@@ -68,23 +111,18 @@ function inputQueries() {
         if(output instanceof Error){
             console.error(`\n${output}\n`);
             inputQueries();
-        } else{
-            output.then(data => {
-                if(typeof data === 'string'){
-                    console.log(`\n${data}\n`);
-                    console.log(`\nQuery execution failed\n`);
-                } else if(typeof data === 'object' && data !== null){
-                    console.log(JSON.stringify(data, null, 4));
-                    console.log('\nQuery execution successful\n');
-                } else if(data instanceof Error){
-                    console.error(data);
+        } else {
+            processOutput(output).then(
+                result => {
+                    console.log(JSON.stringify(result, null, 2))
+                    inputQueries();
                 }
-                inputQueries();
-            });
+            );
         }
     });
 }
 
 module.exports = {
-    main
+    main,
+    fireshellCLI
 }
