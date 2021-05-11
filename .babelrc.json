@@ -6,5 +6,8 @@
                 "target": "current" 
             }
         ]
+    ],
+    "ignore": [
+        "**/*.test.js"
     ]
 }

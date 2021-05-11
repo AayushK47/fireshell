@@ -10,7 +10,7 @@ function createConfigFile(path, data) {
             if(err) {
                 console.log(err);
             } else {
-                console.log("File created successfully")
+                return "File created successfully"
             }
         }
     );

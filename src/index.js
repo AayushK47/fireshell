@@ -2,50 +2,29 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const { Command } = require('commander')
 const path = require('path');
+
 const { processQuery } = require('./query');
 const { processOutput, createConfigFile } = require('./utils');
-const { firerun } = require('./firerun');
+const { firerun } = require('./callbacks/firerun');
+const {
+    setConfigCallback,
+    resetCallback
+} = require('./callbacks/callbacks');
 
 function fireshellCLI() {
     const program = new Command();
     program
         .command('set-config <path> <db>')
-        .option('-u, --url type', 'Url for firebase realtimr database')
-        .action(
-            (fbJSONPath, db, _command, options) => {
-                const config = {}
-                if(options === undefined) {
-                    config.path = fbJSONPath;
-                    config.db = db;
-                    config.url = '';
-                } else {
-                    config.path = fbJSONPath;
-                    config.db = db;
-                    config.url = options[0];
-                    console.log(options[0])
-                }
-                console.log()
-                createConfigFile(
-                    path.join(__dirname, '../', 'config.json'),
-                    config
-                )
-            }
-        );
+        .option('-u, --url type', 'Url for firebase realtime database')
+        .action(setConfigCallback);
     
     program
         .command('reset')
-        .action(() => {
-            fs.unlink(
-                path.join(__dirname, '../', 'config.json'),
-                () => console.log('Config deleted successfully')
-            )
-        });
+        .action(resetCallback);
     
     program
         .command('firerun <inputFilePath> <outputDir>')
-        .action((inputFilePath, outDir) => {
-            firerun(inputFilePath, outDir)
-        })
+        .action(firerun)
     
     program.parse(process.argv);
 
@@ -55,6 +34,7 @@ function fireshellCLI() {
 }
 
 function main(){
+    console.log(__dirname);
     const dirs = fs.readdirSync(__dirname + "/../")
     if(dirs.indexOf("config.json") === -1) {
         inquirer.prompt([
@@ -124,5 +104,6 @@ function inputQueries() {
 
 module.exports = {
     main,
-    fireshellCLI
+    fireshellCLI,
+    inputQueries
 }

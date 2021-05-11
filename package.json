@@ -10,7 +10,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "babel src --out-dir dist --ignore src/*.test.js",
-    "test": "jest . --coverage --env=node --forceExit",
+    "test": "jest ./src/ --coverage --env=node --forceExit",
     "report-coverage": "cat ./coverage/lcov.info | codecov"
   },
   "repository": {
@@ -48,5 +48,16 @@
   "files": [
     "dist",
     "bin"
-  ]
+  ],
+  "jest": {
+    "verbose": true,
+    "transformIgnorePatterns": [
+      "/node_modules/", 
+      "\\.pnp\\.[^\\\/]+$",
+      "src/query.test.js",
+      "src/database.test.js",
+      "src/firestore.test.js",
+      "src/callbacks/callbacks.test.js"
+    ]
+  }
 }

@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { processQuery } = require('./query');
-const { processOutput } = require('./utils');
+const { processQuery } = require('../query');
+const { processOutput } = require('../utils');
 
 function firerun(inputFilepath, outputFilepath) {
     const data = fs.readFileSync(inputFilepath, 'utf8');
