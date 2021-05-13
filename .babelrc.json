@@ -1,5 +1,13 @@
 {
     "presets": [
-        "@babel/preset-env"
+        [
+            "latest-node", 
+            { 
+                "target": "current" 
+            }
+        ]
+    ],
+    "ignore": [
+        "**/*.test.js"
     ]
 }

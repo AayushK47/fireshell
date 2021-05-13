@@ -10,11 +10,12 @@ Fireshell is a CLI tool which can be used to execute realtime database and cloud
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/AayushK47/fireshell?style=for-the-badge)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/AayushK47/fireshell?color=yellowgreen&style=for-the-badge)
 
-## Changelog v1.1.0
+## Changelog v1.2.0
 
 ### Release Highlights
 
-Added a setup for a config file which can be used to access the database directly without answering the prompts everytime user starts the shell.
+- Added commands for setting and resetting config file.
+- Added command for running multiple queries at once by taking input from a file.
 
 
 ## Installation
@@ -27,12 +28,11 @@ npm install -g fireshell
 
 **NOTE:** You need to have Node.js and Node Package Manager installed in order to install fireshell.
 
-## Usage
+## Running the shell
 
 ### Connecting the shell with the database
 
-
-To start the shell, simply run `fireshell` in your terminal. You will be prompted a few questions.
+To start the shell, simply run `fireshell` in your terminal. You will be prompted a few questions. These questions will be prompted the only the first you run the shell or when you reset the shell. The answers provided for these questions will be used for creating a config.json file.
 
 First you'll have to choose the service you want to connect with :-
 
@@ -113,6 +113,46 @@ For realtime database, make sure that you end any read query or any query that r
 ```
 
 For more help, check out [Cloud Firestore](https://firebase.google.com/docs/firestore/) and [Realtime Database](https://firebase.google.com/docs/database/) docs.
+
+## Running the CLI commands
+
+There are 3 CLI commands that you can run :-
+
+1. **set-config** :- Used to set the config parameters.
+
+```
+fireshell set-config <absolute path to firebase config file> <database type> 
+```
+
+This command requires you to pass 2 additional arguments - absolute path to the firebase config json file and the database type. Database type will only take '*database*' or '*firestore*'. Additionally, if you are using realtime database, you need to pass the realtime database url as another optional argument as follows:-
+
+```
+fireshell set-config <absolute path to firebase config file> <database type> -u <realtime database url>
+```
+
+2. **reset** :- Used to reset the config file.
+
+```
+fireshell reset
+```
+
+When you run this command, the previously provided config is deleted and you need to provide the config parameters again.
+
+3. **firerun** :- Used to run multiple database queries from a file and return output in a file.
+
+```
+fireshell firerun <input filepath> <output filepath>
+```
+
+You have to pass the path to input file and path to output file as arguments. Refer *sample.txt* to understand how to format the input file.
+
+# Contributors
+
+<a href="https://github.com/AayushK47/fireshell/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=AayushK47/fireshell" />
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
 
 # License
 
