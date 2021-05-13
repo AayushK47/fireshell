@@ -1,5 +1,6 @@
 {
   "name": "fireshell",
+
   "version": "1.2.0",
   "description": "A shell for firebase realtime database and cloud firestore",
   "main": "dist/index.js",

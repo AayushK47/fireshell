@@ -9,6 +9,7 @@ All notable changes will be documented in this file
 - Added commands for setting and resetting config file.
 - Added command for running multiple queries at once by taking input from a file.
 
+
 ## Changelog v1.1.0
 
 ### Added
