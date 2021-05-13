@@ -5,11 +5,11 @@ const path = require('path');
 
 const { processQuery } = require('./query');
 const { processOutput, createConfigFile } = require('./utils');
-const { firerun } = require('./callbacks/firerun');
+const { firerun } = require('./firerun');
 const {
     setConfigCallback,
     resetCallback
-} = require('./callbacks/callbacks');
+} = require('./callbacks');
 
 function fireshellCLI() {
     const program = new Command();

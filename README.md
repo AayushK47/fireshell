@@ -10,11 +10,12 @@ Fireshell is a CLI tool which can be used to execute realtime database and cloud
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/AayushK47/fireshell?style=for-the-badge)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/AayushK47/fireshell?color=yellowgreen&style=for-the-badge)
 
-## Changelog v1.1.0
+## Changelog v1.2.0
 
 ### Release Highlights
 
-Added a setup for a config file which can be used to access the database directly without answering the prompts everytime user starts the shell.
+- Added commands for setting and resetting config file.
+- Added command for running multiple queries at once by taking input from a file.
 
 
 ## Installation

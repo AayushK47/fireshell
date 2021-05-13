@@ -1,6 +1,6 @@
 {
   "name": "fireshell",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A shell for firebase realtime database and cloud firestore",
   "main": "dist/index.js",
   "bin": {
@@ -10,7 +10,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "babel src --out-dir dist --ignore src/*.test.js",
-    "test": "jest ./src/ --coverage --env=node --forceExit",
+    "test": "jest ./src/ --coverage --env=node --forceExit --runInBand",
     "report-coverage": "cat ./coverage/lcov.info | codecov"
   },
   "repository": {
@@ -23,6 +23,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "babel-preset-latest-node": "^5.5.1",
     "codecov": "^3.8.0",
     "commander": "^4.1.1",
     "dotenv": "^8.2.0",
@@ -33,7 +34,6 @@
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.14.0",
-    "babel-preset-latest-node": "^5.5.1",
     "eslint": "^7.11.0",
     "jest": "^26.5.3"
   },
@@ -52,12 +52,13 @@
   "jest": {
     "verbose": true,
     "transformIgnorePatterns": [
-      "/node_modules/", 
-      "\\.pnp\\.[^\\\/]+$",
+      "/node_modules/",
+      "\\.pnp\\.[^\\/]+$",
       "src/query.test.js",
       "src/database.test.js",
       "src/firestore.test.js",
-      "src/callbacks/callbacks.test.js"
+      "src/callbacks.test.js",
+      "src/firerun.test.js"
     ]
   }
 }

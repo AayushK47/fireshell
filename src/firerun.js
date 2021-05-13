@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { processQuery } = require('../query');
-const { processOutput } = require('../utils');
+const { processQuery } = require('./query');
+const { processOutput } = require('./utils');
 
 function firerun(inputFilepath, outputFilepath) {
     const data = fs.readFileSync(inputFilepath, 'utf8');
@@ -21,14 +21,8 @@ async function saveResult(queryList, outputFilepath) {
     for(let query of queryList) {
         output += `\n${query.name}\n${JSON.stringify(await processOutput(query.result), null, 2)}\n`;
     }
-    fs.writeFileSync(
-        outputFilepath,
-        output,
-        'utf8',
-        'a'
-    )
-    console.log('files written');
-    process.exit();
+    fs.writeFileSync( outputFilepath, output, 'utf8', 'a' );
+    setTimeout(() => process.exit(), 30000);
 }
 
 module.exports = {

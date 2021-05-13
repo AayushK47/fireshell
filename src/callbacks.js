@@ -1,18 +1,23 @@
 const path = require('path');
 const fs = require('fs');
 
-const { createConfigFile } = require('../utils');
+const { createConfigFile } = require('./utils');
 
 function setConfigCallback(fbJSONPath, db, _command, options) {
     const config = {}
+
+    console.log(fbJSONPath)
+    console.log(db)
+    console.log(options)
+
     if(options === undefined) {
         config.path = fbJSONPath;
         config.db = db;
         config.url = '';
     } else {
-        config.path = fbJSONPath;
-        config.db = db;
-        config.url = options[0];
+        config.path = db;
+        config.db = options[0];
+        config.url = fbJSONPath;
     }
     createConfigFile(
         path.join(__dirname, '../', 'config.json'),
@@ -21,7 +26,7 @@ function setConfigCallback(fbJSONPath, db, _command, options) {
 }
 
 function resetCallback() {
-    fs.unlink(path.join(__dirname, '../', 'config.json'), () => console.log('Config deleted successfully'))
+    fs.unlink(path.join(__dirname, '../', 'config.json'), () => 0)
 }
 
 module.exports = {

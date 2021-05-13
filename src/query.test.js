@@ -84,7 +84,7 @@ test('should run and return the correct output - firestore reading a doc query',
 })
 
 test('should return an error - firestore error', () => {
-    var output = processQuery('db.ref().once()', 'firebase')
+    var output = processQuery('db.ref().once()', 'firestore')
     expect(output instanceof Error).toBe(true);
 });
 
