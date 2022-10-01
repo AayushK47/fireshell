@@ -1,16 +1,15 @@
 {
   "name": "fireshell",
-
   "version": "1.2.0",
   "description": "A shell for firebase realtime database and cloud firestore",
   "main": "dist/index.js",
   "bin": {
-    "@aayushk47/fireshell": "./bin/fireshell.js",
     "fireshell": "./bin/fireshell.js"
   },
   "scripts": {
-    "prebuild": "rm -rf dist",
-    "build": "babel src --out-dir dist --ignore src/*.test.js",
+    "prebuild": "rimraf dist",
+    "build": "tsc -p ./",
+    "dev": "tsc --watch",
     "test": "jest ./src/ --coverage --env=node --forceExit --runInBand",
     "report-coverage": "cat ./coverage/lcov.info | codecov"
   },
@@ -24,19 +23,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "babel-preset-latest-node": "^5.5.1",
-    "codecov": "^3.8.0",
-    "commander": "^4.1.1",
-    "dotenv": "^8.2.0",
-    "firebase": "^7.24.0",
-    "inquirer": "^7.3.3",
-    "shortid": "^2.2.15"
+    "commander": "^9.4.1",
+    "firebase": "^9.10.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.14.0",
-    "eslint": "^7.11.0",
-    "jest": "^26.5.3"
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4"
   },
   "keywords": [
     "fireshell",
