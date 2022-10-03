@@ -1,8 +1,7 @@
-import { TestCommand } from "./commands";
+import { AddConfigCommand } from "./commands";
 
 export class CommandFactory {
-
-    getTestCommand() {
-        return new TestCommand();
+    getAddConfigCommand() {
+        return new AddConfigCommand();
     }
 }

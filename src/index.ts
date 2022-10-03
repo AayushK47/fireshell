@@ -6,9 +6,9 @@ function main() {
     const commandFactory = new CommandFactory();
 
     command
-        .command('test')
-        .description('Command to generate a new react project')
-        .action(commandFactory.getTestCommand().run);
+        .command('add-config')
+        .description('Command to add a firebase project config')
+        .action(commandFactory.getAddConfigCommand().run);
     
     command.parse(process.argv);
 }
