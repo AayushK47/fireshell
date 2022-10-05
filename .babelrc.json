@@ -1,0 +1,13 @@
+{
+    "presets": [
+        [
+            "latest-node", 
+            { 
+                "target": "current" 
+            }
+        ]
+    ],
+    "ignore": [
+        "**/*.test.js"
+    ]
+}
